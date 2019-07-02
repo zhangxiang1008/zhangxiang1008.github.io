@@ -172,7 +172,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-环境装备"><a href="#1-环境装备" class="headerlink" title="1.环境装备"></a>1.环境装备</h2><h3 id="1-1-下载git安装-git-https-git-scm-com-downloads-全部默认"><a href="#1-1-下载git安装-git-https-git-scm-com-downloads-全部默认" class="headerlink" title="1.1 下载git安装 git https://git-scm.com/downloads 全部默认"></a>1.1 下载git安装 git <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a> 全部默认</h3><h3 id="安装node-js-http-nodejs-cn-全部默认就行，不用改"><a href="#安装node-js-http-nodejs-cn-全部默认就行，不用改" class="headerlink" title="安装node.js http://nodejs.cn/ 全部默认就行，不用改"></a>安装node.js <a href="http://nodejs.cn/" target="_blank" rel="noopener">http://nodejs.cn/</a> 全部默认就行，不用改</h3>
+        <h2 id="1-环境装备"><a href="#1-环境装备" class="headerlink" title="1.环境装备"></a>1.环境装备</h2><h3 id="1-1下载git安装-git-https-git-scm-com-downloads-全部默认"><a href="#1-1下载git安装-git-https-git-scm-com-downloads-全部默认" class="headerlink" title="1.1下载git安装 git https://git-scm.com/downloads 全部默认"></a>1.1下载git安装 git <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">https://git-scm.com/downloads</a> 全部默认</h3><pre><code>在安装过程中记得选择git的命令行编辑器GitBash,与mac中命令行功能类似，可以在其中下载所需的hexo框架</code></pre><h3 id="1-2安装node-js-http-nodejs-cn-全部默认就行，不用改"><a href="#1-2安装node-js-http-nodejs-cn-全部默认就行，不用改" class="headerlink" title="1.2安装node.js http://nodejs.cn/ 全部默认就行，不用改"></a>1.2安装node.js <a href="http://nodejs.cn/" target="_blank" rel="noopener">http://nodejs.cn/</a> 全部默认就行，不用改</h3><pre><code>安装完成后，win+r 输入cmd，打开命令行输入 node -v,返回版本号，即安装成功</code></pre><blockquote>
+<p>安装完成git后，打开GitBash，验证node -v ,npm -v,之后安装cnpm，使用taobao镜像文件，在GitBash中输入<br>npm -install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a> 回车<br>cnpm -g hexo-cli全局安装hexo框架，hexo -v 验证</p>
+</blockquote>
+<h2 id="2-开始使用hexo"><a href="#2-开始使用hexo" class="headerlink" title="2 开始使用hexo"></a>2 开始使用hexo</h2><h3 id="2-1新建一个blog文件夹"><a href="#2-1新建一个blog文件夹" class="headerlink" title="2.1新建一个blog文件夹"></a>2.1新建一个blog文件夹</h3><pre><code>之后所有的关于博客的文件全在此文件夹中（若出错，只需删掉重来），使用命令行，在你需要的文件夹新建blog文件夹</code></pre><h3 id="2-2初始化hexo"><a href="#2-2初始化hexo" class="headerlink" title="2.2初始化hexo"></a>2.2初始化hexo</h3><pre><code>hexo init，出现start blog with hexo,此时hexo s，博客启动，根据命令行中提供的端口在浏览器中预览，成功后ctrl+c退出</code></pre><h3 id="2-3新建一博客"><a href="#2-3新建一博客" class="headerlink" title="2.3新建一博客"></a>2.3新建一博客</h3><pre><code>hexo -n &quot;博客名称&quot;，回车，根据提供的目录进入查看里面的生成了那些文件</code></pre><h3 id="2-4修改博客"><a href="#2-4修改博客" class="headerlink" title="2.4修改博客"></a>2.4修改博客</h3><pre><code>可以vim文件，进行修改，可以使用md文件编辑器，打开“博客名称”.md文件进行修改，之后保存，命令行回到blog。</code></pre><h3 id="2-5博客同步"><a href="#2-5博客同步" class="headerlink" title="2.5博客同步"></a>2.5博客同步</h3><pre><code>hexo clean, hexo g, hexo s，根据命令行中提供的端口在浏览器中预览，成功后ctrl+c退出</code></pre><h3 id="2-6部署到github上，远端服务器"><a href="#2-6部署到github上，远端服务器" class="headerlink" title="2.6部署到github上，远端服务器"></a>2.6部署到github上，远端服务器</h3><ul>
+<li><p>安装deployer部署包，cnpm install -save hexo-deployer-git回车，修改_config文件</p>
+<p>  <img src="https://img-blog.csdnimg.cn/20190702153801981.png" alt="config"></p>
+</li>
+<li><p>hexo d,部署到github，期间可能需要输入你的github账户和密码，照样输入即可，密码输入是看不见的，</p>
+</li>
+<li><p>zhangxiang1008.github.io， 按照命名规则进入你的博客。</p>
+</li>
+</ul>
+<h2 id="3-修改博客主题"><a href="#3-修改博客主题" class="headerlink" title="3 修改博客主题"></a>3 修改博客主题</h2><ul>
+<li><p>在github找到你喜欢的博客主题，此处以很多人使用的yilia博客主题为例<br><a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia</a><br><img src="https://img-blog.csdnimg.cn/20190702154955671.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMDE4MjEz,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>使用方法 $ git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia（共粘贴）<br><img src="https://img-blog.csdnimg.cn/20190702155055610.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>在文件夹中themes文件中下载好该主题文件<br><img src="https://img-blog.csdnimg.cn/201907021552164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMDE4MjEz,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+<li><p>配置到我的博客中，修改_config文件<br><img src="https://img-blog.csdnimg.cn/20190702155323260.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>保存后，重复2.4  2.5操作，之后浏览器登录</p>
+</li>
+</ul>
+
       
 
       
