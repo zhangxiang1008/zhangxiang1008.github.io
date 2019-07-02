@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190702155055610.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/201907021552164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMDE4MjEz,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190702155323260.png">
-<meta property="og:updated_time" content="2019-07-02T09:19:19.875Z">
+<meta property="og:updated_time" content="2019-07-02T10:05:45.594Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于hexo框架搭建我的博客">
 <meta name="twitter:description" content="1.环境装备1.1下载git安装 git https://git-scm.com/downloads 全部默认在安装过程中记得选择git的命令行编辑器GitBash,与mac中命令行功能类似，可以在其中下载所需的hexo框架1.2安装node.js http://nodejs.cn/ 全部默认就行，不用改安装完成后，win+r 输入cmd，打开命令行输入 node -v,返回版本号，即安装成功">
@@ -185,7 +185,7 @@
 <p>安装完成git后，打开GitBash，验证node -v ,npm -v,之后安装cnpm，使用taobao镜像文件，在GitBash中输入<br>npm -install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a> 回车<br>cnpm -g hexo-cli全局安装hexo框架，hexo -v 验证</p>
 </blockquote>
 <h2 id="2-开始使用hexo"><a href="#2-开始使用hexo" class="headerlink" title="2 开始使用hexo"></a>2 开始使用hexo</h2><h3 id="2-1新建一个blog文件夹"><a href="#2-1新建一个blog文件夹" class="headerlink" title="2.1新建一个blog文件夹"></a>2.1新建一个blog文件夹</h3><pre><code>之后所有的关于博客的文件全在此文件夹中（若出错，只需删掉重来），使用命令行，在你需要的文件夹新建blog文件夹</code></pre><h3 id="2-2初始化hexo"><a href="#2-2初始化hexo" class="headerlink" title="2.2初始化hexo"></a>2.2初始化hexo</h3><pre><code>hexo init，出现start blog with hexo,此时hexo s，博客启动，根据命令行中提供的端口在浏览器中预览，成功后ctrl+c退出</code></pre><h3 id="2-3新建一博客"><a href="#2-3新建一博客" class="headerlink" title="2.3新建一博客"></a>2.3新建一博客</h3><pre><code>hexo -n &quot;博客名称&quot;，回车，根据提供的目录进入查看里面的生成了那些文件</code></pre><h3 id="2-4修改博客"><a href="#2-4修改博客" class="headerlink" title="2.4修改博客"></a>2.4修改博客</h3><pre><code>可以vim文件，进行修改，可以使用md文件编辑器，打开“博客名称”.md文件进行修改，之后保存，命令行回到blog。</code></pre><h3 id="2-5博客同步"><a href="#2-5博客同步" class="headerlink" title="2.5博客同步"></a>2.5博客同步</h3><pre><code>hexo clean, hexo g, hexo s，根据命令行中提供的端口在浏览器中预览，成功后ctrl+c退出</code></pre><h3 id="2-6部署到github上，远端服务器"><a href="#2-6部署到github上，远端服务器" class="headerlink" title="2.6部署到github上，远端服务器"></a>2.6部署到github上，远端服务器</h3><ul>
-<li><p>安装deployer部署包，cnpm install -save hexo-deployer-git回车，修改_config文件</p>
+<li><p>安装deployer部署包，cnpm install –save hexo-deployer-git回车，修改_config文件</p>
 <p>  <img src="https://img-blog.csdnimg.cn/20190702153801981.png" alt="config"></p>
 </li>
 <li><p>hexo d,部署到github，期间可能需要输入你的github账户和密码，照样输入即可，密码输入是看不见的，</p>
@@ -364,6 +364,8 @@
         </div>
       </div>
       <footer id="footer">
+<span id="busuanzi_container_site_pv">    本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<span id="busuanzi_container_site_uv">  本站访客数<span id="busuanzi_value_site_uv"></span>人次</span>
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
@@ -376,7 +378,8 @@
   </div>
 </footer>
     </div>
-    <script>
+    <script  async  src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
