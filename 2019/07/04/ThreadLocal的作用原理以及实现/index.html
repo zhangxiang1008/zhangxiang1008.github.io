@@ -6,13 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ThreadLocal的作用原理以及实现 | Hexo</title>
+  <title>ThreadLocal的作用原理以及实现 | 张祥的小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="threadLocal作用 当只有一个共享资源时，创建多个子线程，在没有处理的情况下，这些子线程肯定共同操作这一共享资源中的共享数据，在容易造成线程安全问题的同时，也会不符合一些开发情况的要求。 所以threadLocal的作用就是，将在共享资源类中运用ThreadLocal建立各线程自己独享的序列。是原本的共享资源，在每个线程中独立操作。原理  threadLocal使用的是map键值对，t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThreadLocal的作用原理以及实现">
 <meta property="og:url" content="http://yoursite.com/2019/07/04/ThreadLocal的作用原理以及实现/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="张祥的小黑屋">
 <meta property="og:description" content="threadLocal作用 当只有一个共享资源时，创建多个子线程，在没有处理的情况下，这些子线程肯定共同操作这一共享资源中的共享数据，在容易造成线程安全问题的同时，也会不符合一些开发情况的要求。 所以threadLocal的作用就是，将在共享资源类中运用ThreadLocal建立各线程自己独享的序列。是原本的共享资源，在每个线程中独立操作。原理  threadLocal使用的是map键值对，t">
 <meta property="og:locale" content="default">
 <meta property="og:updated_time" content="2019-07-04T01:54:40.316Z">
@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="ThreadLocal的作用原理以及实现">
 <meta name="twitter:description" content="threadLocal作用 当只有一个共享资源时，创建多个子线程，在没有处理的情况下，这些子线程肯定共同操作这一共享资源中的共享数据，在容易造成线程安全问题的同时，也会不符合一些开发情况的要求。 所以threadLocal的作用就是，将在共享资源类中运用ThreadLocal建立各线程自己独享的序列。是原本的共享资源，在每个线程中独立操作。原理  threadLocal使用的是map键值对，t">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="张祥的小黑屋" type="application/atom+xml">
   
   
     <link rel="icon" href="/assets/goutou.jpg">
@@ -52,6 +52,8 @@
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Tony Zhang</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">zxblog</p>
 		
 
 		<nav class="header-menu">
@@ -110,6 +112,8 @@
 			<hgroup>
 			  <h1 class="header-author js-header-author">Tony Zhang</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>zxblog<i class="icon icon-quo-right"></i></p>
 			
 			
 			
