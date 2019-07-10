@@ -43,7 +43,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/assets/goutou.jpg" class="js-avatar">
+			<img src="/assets/timg.jpg" class="js-avatar">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">Tony Zhang</a></h1>
@@ -103,7 +103,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/assets/goutou.jpg" class="js-avatar">
+				<img src="/assets/timg.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">Tony Zhang</h1>
@@ -155,6 +155,133 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-java反射机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/10/java反射机制/">java反射机制</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/10/java反射机制/" class="archive-article-date">
+  	<time datetime="2019-07-10T03:05:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+
+<h2 id="java反射"><a href="#java反射" class="headerlink" title="java反射"></a>java反射</h2><ul>
+<li>正在运行，动态获取这个类的所有信息</li>
+<li>反编译：.class–&gt;.java</li>
+<li>通过反射机制访问java对象的属性，方法，构造方法<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3></li>
+<li>jdbc加载驱动</li>
+<li>spring ioc</li>
+<li>框架</li>
+</ul>
+<h3 id="反射使用"><a href="#反射使用" class="headerlink" title="反射使用"></a>反射使用</h3><h4 id="第一种无参构造器使用"><a href="#第一种无参构造器使用" class="headerlink" title="第一种无参构造器使用"></a>第一种无参构造器使用</h4><ul>
+<li>类文件创建</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.reflaction1;</span><br><span class="line"></span><br><span class="line">public class UserEntity &#123;</span><br><span class="line">	private String name;</span><br><span class="line">	private int id ;</span><br><span class="line">	public UserEntity() &#123;</span><br><span class="line">		System.out.println(&quot;无参构造器&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public UserEntity(int id ) &#123;</span><br><span class="line">			System.out.println(&quot;you参构造器id:&quot;+id);</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setId(int id) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">	&#125; </span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用反射创建对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.reflaction1;</span><br><span class="line"></span><br><span class="line">public class classform &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException &#123;</span><br><span class="line">		//1.实例对象的方法1，除了new，可以使用反射机制创建对象</span><br><span class="line">		//2.Class.forName(&quot;zx.lol.reflaction1.UserEntity&quot;);传入完整的类路劲</span><br><span class="line">		Class&lt;?&gt; forname = Class.forName(&quot;zx.lol.reflaction1.UserEntity&quot;);</span><br><span class="line">		//3newinstance，使用无参构造器，创建对象</span><br><span class="line">		Object newinstance = forname.newInstance();</span><br><span class="line">		//4 强转object为userentity</span><br><span class="line">		UserEntity user = (UserEntity) newinstance;</span><br><span class="line">		System.out.println(&quot;user: &quot;+user);</span><br><span class="line">		user.setId(9667);</span><br><span class="line">		System.out.println(user.getId());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>输出结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">无参构造器</span><br><span class="line">user: zx.lol.reflaction1.UserEntity@15db9742</span><br><span class="line">9667</span><br></pre></td></tr></table></figure>
+
+<p>在将类文件中无参构造器注释之后，报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.InstantiationException: zx.lol.reflaction1.UserEntity</span><br><span class="line">	at java.lang.Class.newInstance(Unknown Source)</span><br><span class="line">	at zx.lol.reflaction1.classform.main(classform.java:10)</span><br><span class="line">Caused by: java.lang.NoSuchMethodException: zx.lol.reflaction1.UserEntity.&lt;init&gt;()</span><br><span class="line">	at java.lang.Class.getConstructor0(Unknown Source)</span><br><span class="line">	... 2 more</span><br></pre></td></tr></table></figure>
+
+<p>可知，newinstance使用的是无参构造器，创建对象new。</p>
+<h4 id="第二种有参构造器"><a href="#第二种有参构造器" class="headerlink" title="第二种有参构造器"></a>第二种有参构造器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; forname = Class.forName(&quot;zx.lol.reflaction1.UserEntity&quot;);</span><br><span class="line">		//3newinstance，使用无参构造器，创建对象</span><br><span class="line">		Constructor&lt;?&gt; constructor = forname.getConstructor(int.class);</span><br><span class="line">		Object newinstance = constructor.newInstance(9567);</span><br><span class="line">		//4 强转object为userentity</span><br><span class="line">		UserEntity user = (UserEntity) newinstance;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">you参构造器id:9567</span><br></pre></td></tr></table></figure>
+
+<p>与无参构造器区别在与获得class后，获得使用Constractor获得构造器，注意.getConstructor(int.class);传入参数类型，与类文件中有参构造器中参数类型相同，之后使用constructor调用newInstance，得到对象。</p>
+<h4 id="使用反射获取类中的所有方法"><a href="#使用反射获取类中的所有方法" class="headerlink" title="使用反射获取类中的所有方法"></a>使用反射获取类中的所有方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; forname = Class.forName(&quot;zx.lol.reflaction1.UserEntity&quot;);</span><br><span class="line">	//获取所有方法</span><br><span class="line">	Method[] method = forname.getDeclaredMethods();</span><br><span class="line">	for (Method method2 : method) &#123;</span><br><span class="line">		System.out.println(method2.getName());</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getName</span><br><span class="line">getId</span><br><span class="line">setName</span><br><span class="line">setId</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>为什么继承的父类中的方法没有打印出来<br>因为调用的api，过滤。如果将getDeclaredMethods替换为getMethods，即可将object中的方法一并打印出来。</li>
+<li>打印结果如下<br>getName<br>getId<br>setName<br>setId<br>wait<br>wait<br>wait<br>equals<br>toString<br>hashCode<br>getClass<br>notify<br>notifyAll</li>
+</ul>
+</blockquote>
+<h4 id="获取所有的成员属"><a href="#获取所有的成员属" class="headerlink" title="获取所有的成员属"></a>获取所有的成员属</h4><p> forname.getDeclaredFields();</p>
+<h4 id="使用反射获取类中私有属性"><a href="#使用反射获取类中私有属性" class="headerlink" title="使用反射获取类中私有属性"></a>使用反射获取类中私有属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Class&lt;?&gt; forname = Class.forName(&quot;zx.lol.reflaction1.UserEntity&quot;); </span><br><span class="line">	 Object oj= forname.newInstance();</span><br><span class="line">	 Field field = forname.getDeclaredField(&quot;id&quot;);</span><br><span class="line">	 field.setAccessible(true);</span><br><span class="line">	 field.set(oj, 111233);</span><br><span class="line">	 UserEntity user = (UserEntity) oj;</span><br><span class="line">	System.out.println(user.getId());</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">无参构造器</span><br><span class="line">111233</span><br></pre></td></tr></table></figure>
+
+<h2 id="springIOC"><a href="#springIOC" class="headerlink" title="springIOC"></a>springIOC</h2><ul>
+<li>spring : 将每个bean与bean之间的关系，交于第三方容器（spring）去管理。</li>
+<li>spring原理就是使用反射+dom4j。</li>
+<li>具体实现代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">package com.itmayiedu.classFrorm;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Field;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.dom4j.Document;</span><br><span class="line">import org.dom4j.DocumentException;</span><br><span class="line">import org.dom4j.Element;</span><br><span class="line">import org.dom4j.io.SAXReader;</span><br><span class="line"></span><br><span class="line">import com.itmayiedu.entity.UserEntity;</span><br><span class="line"></span><br><span class="line">public class ClassPathXmlApplicationContext &#123;</span><br><span class="line">	private String xmlPath;</span><br><span class="line"></span><br><span class="line">	public ClassPathXmlApplicationContext(String xmlPath) &#123;</span><br><span class="line">		this.xmlPath = xmlPath;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Object getBean(String beanId) throws DocumentException, ClassNotFoundException, NoSuchFieldException,</span><br><span class="line">			SecurityException, IllegalArgumentException, IllegalAccessException, InstantiationException &#123;</span><br><span class="line">		// spring加载过程，spring ioc实现原理</span><br><span class="line">		// 1.获取xml文件，解析</span><br><span class="line">		</span><br><span class="line">		SAXReader saxReader = new SAXReader();</span><br><span class="line">		// this.getClass().getClassLoader().getResourceAsStream(&quot;xmlPath&quot;)获得当前项目路径</span><br><span class="line">		</span><br><span class="line">		Document read = saxReader.read(this.getClass().getClassLoader().getResourceAsStream(xmlPath));</span><br><span class="line">		//获取节点对象</span><br><span class="line">		Element rootElement = read.getRootElement();</span><br><span class="line">		List&lt;Element&gt; elements = rootElement.elements();</span><br><span class="line">		Object obj = null;</span><br><span class="line">		for (Element sonEle : elements) &#123;</span><br><span class="line">			// 2.获取每个bean的配置，获取class地址</span><br><span class="line">			String sonBeanId = sonEle.attributeValue(&quot;id&quot;);</span><br><span class="line">			if (!beanId.equals(sonBeanId)) &#123;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;</span><br><span class="line">			String beanClassPath = sonEle.attributeValue(&quot;class&quot;);</span><br><span class="line">			// 3.拿到class地址，反射实例化对象，使用反射api，为私有属性赋值</span><br><span class="line">			Class&lt;?&gt; forName = Class.forName(beanClassPath);</span><br><span class="line">			obj = forName.newInstance();</span><br><span class="line">			//拿到成员属性</span><br><span class="line">			List&lt;Element&gt; sonSoneleme = sonEle.elements();</span><br><span class="line">			for (Element element : sonSoneleme) &#123;</span><br><span class="line">				String name = element.attributeValue(&quot;name&quot;);</span><br><span class="line">				String value = element.attributeValue(&quot;value&quot;);</span><br><span class="line">				// 通过反射技术对私有属性赋值</span><br><span class="line">				Field declaredField = forName.getDeclaredField(name);</span><br><span class="line">				//允许访问私有成员变量</span><br><span class="line">				declaredField.setAccessible(true);</span><br><span class="line">				declaredField.set(obj, value);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		return obj;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException, SecurityException,</span><br><span class="line">			IllegalArgumentException, IllegalAccessException, InstantiationException, DocumentException &#123;</span><br><span class="line">		ClassPathXmlApplicationContext appLication = new ClassPathXmlApplicationContext(&quot;user.xml&quot;);</span><br><span class="line">		Object bean = appLication.getBean(&quot;user1&quot;);</span><br><span class="line">		UserEntity user = (UserEntity) bean;</span><br><span class="line">		System.out.println(user.getUserId() + &quot;----&quot; + user.getUserName());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/10/java反射机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-springboot笔记初级" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
