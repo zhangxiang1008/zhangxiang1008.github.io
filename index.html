@@ -156,6 +156,118 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-java注解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/11/java注解/">java注解</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/11/java注解/" class="archive-article-date">
+  	<time datetime="2019-07-11T03:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<h2 id="Java注解"><a href="#Java注解" class="headerlink" title="Java注解"></a>Java注解</h2><ul>
+<li>jdk1.5之后添加的新功能，很多框架为了简化代码，都使用注解。可以理解为插件，为代码级别的插件，@xxx卸载类方法上，注解不会也不能影响代码的逻辑。</li>
+<li>分为 内置注解，与自定义注解</li>
+</ul>
+<ul>
+<li><p>内置注解<br>@Override 重写 @Deprecated过时 @SupressWarning去除警告<br>@Target(value=ElementType.METHOD)//表示使用反射的范围<br>@Retention(RetentionPolicy.RUNTIME)//允许反射获取信息</p>
+</li>
+<li><p>自定义注解</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.anotation;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.ElementType;</span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line">import java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line">@Target(value=ElementType.METHOD)//表示使用反射的范围</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)//允许反射获取信息</span><br><span class="line">public @interface AnnotationT1 &#123;</span><br><span class="line">		String value();</span><br><span class="line">		int Aid();</span><br><span class="line">		String[] arr ();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class AnnDemo&#123;</span><br><span class="line">	private String name;</span><br><span class="line">	@AnnotationT1(value = &quot;zxtest1&quot;,Aid = 12,arr = &#123;&quot;123&quot;,&quot;456&quot;&#125;)//属性值根据自定义注解类中属性值给定</span><br><span class="line">	public void add() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自定义注解类可以默认属性值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public @interface AnnotationT1 &#123;</span><br><span class="line">	String value() default &quot;1213&quot;;</span><br><span class="line">		int Aid() default 123;</span><br><span class="line">		String[] arr ();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="使用注解实现ORM框架映射"><a href="#使用注解实现ORM框架映射" class="headerlink" title="使用注解实现ORM框架映射"></a>使用注解实现ORM框架映射</h2><ul>
+<li>实体类的属性命名，username，userage。</li>
+<li>数据库命名 user_name，user_age。</li>
+</ul>
+<br>
+
+<h4 id="orm对象关系映射实现select-user-name，user-age-from-user-table。"><a href="#orm对象关系映射实现select-user-name，user-age-from-user-table。" class="headerlink" title="orm对象关系映射实现select  user_name，user_age from user_table。"></a>orm对象关系映射实现select  user_name，user_age from user_table。</h4><p> 首先定义注解</p>
+<ul>
+<li>定义SetTable注解类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.orm;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line"></span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface SetTable &#123;</span><br><span class="line">	String value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义SetProperty注解类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.orm;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line"></span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface SetProperty &#123;</span><br><span class="line">	String name();</span><br><span class="line">	int len();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义一个userentity，用来插入注解</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.orm;</span><br><span class="line"></span><br><span class="line">@SetTable(&quot;user_table&quot;)</span><br><span class="line">public class userEntity&#123;</span><br><span class="line">	@SetProperty(name = &quot;user_name&quot;,len = 10)</span><br><span class="line">	private String username;</span><br><span class="line">	@SetProperty(name=&quot;user_age&quot;, len = 10)</span><br><span class="line">	private int userage;</span><br><span class="line">	public String getUsername() &#123;</span><br><span class="line">		return username;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setUsername(String username) &#123;</span><br><span class="line">		this.username = username;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getUserage() &#123;</span><br><span class="line">		return userage;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setUserage(int userage) &#123;</span><br><span class="line">		this.userage = userage;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义一个测试类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.orm;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Annotation;</span><br><span class="line">import java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line">		//1.项目使用注解，必定使用反射</span><br><span class="line">		Class&lt;?&gt; forname = Class.forName(&quot;zx.lol.orm.userEntity&quot;);</span><br><span class="line">		/*</span><br><span class="line">		 * Annotation[] annotations = forname.getAnnotations();//获取某一个类上使用那些注解 for</span><br><span class="line">		 * (Annotation annotation : annotations) &#123; System.out.println(annotation); &#125;</span><br><span class="line">		 */</span><br><span class="line">		</span><br><span class="line">		Field[] fields = forname.getDeclaredFields();</span><br><span class="line">		StringBuffer sf = new StringBuffer();</span><br><span class="line">		sf.append(&quot;select  &quot;);</span><br><span class="line">		for(int i = 0;i&lt;fields.length;i++ ) &#123;</span><br><span class="line">			SetProperty setProperty = fields[i].getAnnotation(SetProperty.class);</span><br><span class="line">			String property = setProperty.name();</span><br><span class="line">			sf.append(property);</span><br><span class="line">			if (i==fields.length-1) &#123;</span><br><span class="line">				sf.append(&quot; from &quot;);</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				sf.append(&quot;,&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">		//获取注解对象</span><br><span class="line">		SetTable setTable = forname.getAnnotation(SetTable.class);</span><br><span class="line">		String tablename = setTable.value();</span><br><span class="line">		sf.append(tablename);</span><br><span class="line">		System.out.println(sf);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行结果成功</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select  user_name,user_age from user_table</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/11/java注解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java反射机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

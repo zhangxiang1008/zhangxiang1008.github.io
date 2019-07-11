@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | 张祥的小黑屋</title>
+  <title>java注解 | 张祥的小黑屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="张祥的小黑屋">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="Java注解 jdk1.5之后添加的新功能，很多框架为了简化代码，都使用注解。可以理解为插件，为代码级别的插件，@xxx卸载类方法上，注解不会也不能影响代码的逻辑。 分为 内置注解，与自定义注解   内置注解@Override 重写 @Deprecated过时 @SupressWarning去除警告@Target(value=ElementType.METHOD)//表示使用反射的范围@Rete">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java注解">
+<meta property="og:url" content="http://yoursite.com/2019/07/11/java注解/index.html">
 <meta property="og:site_name" content="张祥的小黑屋">
+<meta property="og:description" content="Java注解 jdk1.5之后添加的新功能，很多框架为了简化代码，都使用注解。可以理解为插件，为代码级别的插件，@xxx卸载类方法上，注解不会也不能影响代码的逻辑。 分为 内置注解，与自定义注解   内置注解@Override 重写 @Deprecated过时 @SupressWarning去除警告@Target(value=ElementType.METHOD)//表示使用反射的范围@Rete">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-11T03:14:02.883Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="张祥的小黑屋">
+<meta name="twitter:title" content="java注解">
+<meta name="twitter:description" content="Java注解 jdk1.5之后添加的新功能，很多框架为了简化代码，都使用注解。可以理解为插件，为代码级别的插件，@xxx卸载类方法上，注解不会也不能影响代码的逻辑。 分为 内置注解，与自定义注解   内置注解@Override 重写 @Deprecated过时 @SupressWarning去除警告@Target(value=ElementType.METHOD)//表示使用反射的范围@Rete">
   
     <link rel="alternative" href="/atom.xml" title="张祥的小黑屋" type="application/atom+xml">
   
@@ -154,184 +158,229 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-java注解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      java注解
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/11/java注解/" class="archive-article-date">
+
+        
+        <a href="/2019/07/11/java注解/" class="archive-article-date">
   	<time datetime="2019-07-11T03:12:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/11/java注解/">java注解</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+<h2 id="Java注解"><a href="#Java注解" class="headerlink" title="Java注解"></a>Java注解</h2><ul>
+<li>jdk1.5之后添加的新功能，很多框架为了简化代码，都使用注解。可以理解为插件，为代码级别的插件，@xxx卸载类方法上，注解不会也不能影响代码的逻辑。</li>
+<li>分为 内置注解，与自定义注解</li>
+</ul>
+<ul>
+<li><p>内置注解<br>@Override 重写 @Deprecated过时 @SupressWarning去除警告<br>@Target(value=ElementType.METHOD)//表示使用反射的范围<br>@Retention(RetentionPolicy.RUNTIME)//允许反射获取信息</p>
+</li>
+<li><p>自定义注解</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.anotation;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.ElementType;</span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line">import java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line">@Target(value=ElementType.METHOD)//表示使用反射的范围</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)//允许反射获取信息</span><br><span class="line">public @interface AnnotationT1 &#123;</span><br><span class="line">		String value();</span><br><span class="line">		int Aid();</span><br><span class="line">		String[] arr ();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class AnnDemo&#123;</span><br><span class="line">	private String name;</span><br><span class="line">	@AnnotationT1(value = &quot;zxtest1&quot;,Aid = 12,arr = &#123;&quot;123&quot;,&quot;456&quot;&#125;)//属性值根据自定义注解类中属性值给定</span><br><span class="line">	public void add() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<ul>
+<li>自定义注解类可以默认属性值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public @interface AnnotationT1 &#123;</span><br><span class="line">	String value() default &quot;1213&quot;;</span><br><span class="line">		int Aid() default 123;</span><br><span class="line">		String[] arr ();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
+<h2 id="使用注解实现ORM框架映射"><a href="#使用注解实现ORM框架映射" class="headerlink" title="使用注解实现ORM框架映射"></a>使用注解实现ORM框架映射</h2><ul>
+<li>实体类的属性命名，username，userage。</li>
+<li>数据库命名 user_name，user_age。</li>
+</ul>
+<br>
+
+<h4 id="orm对象关系映射实现select-user-name，user-age-from-user-table。"><a href="#orm对象关系映射实现select-user-name，user-age-from-user-table。" class="headerlink" title="orm对象关系映射实现select  user_name，user_age from user_table。"></a>orm对象关系映射实现select  user_name，user_age from user_table。</h4><p> 首先定义注解</p>
+<ul>
+<li>定义SetTable注解类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.orm;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line"></span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface SetTable &#123;</span><br><span class="line">	String value();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义SetProperty注解类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.orm;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line"></span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface SetProperty &#123;</span><br><span class="line">	String name();</span><br><span class="line">	int len();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义一个userentity，用来插入注解</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.orm;</span><br><span class="line"></span><br><span class="line">@SetTable(&quot;user_table&quot;)</span><br><span class="line">public class userEntity&#123;</span><br><span class="line">	@SetProperty(name = &quot;user_name&quot;,len = 10)</span><br><span class="line">	private String username;</span><br><span class="line">	@SetProperty(name=&quot;user_age&quot;, len = 10)</span><br><span class="line">	private int userage;</span><br><span class="line">	public String getUsername() &#123;</span><br><span class="line">		return username;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setUsername(String username) &#123;</span><br><span class="line">		this.username = username;</span><br><span class="line">	&#125;</span><br><span class="line">	public int getUserage() &#123;</span><br><span class="line">		return userage;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setUserage(int userage) &#123;</span><br><span class="line">		this.userage = userage;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定义一个测试类</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">package zx.lol.orm;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Annotation;</span><br><span class="line">import java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line">		//1.项目使用注解，必定使用反射</span><br><span class="line">		Class&lt;?&gt; forname = Class.forName(&quot;zx.lol.orm.userEntity&quot;);</span><br><span class="line">		/*</span><br><span class="line">		 * Annotation[] annotations = forname.getAnnotations();//获取某一个类上使用那些注解 for</span><br><span class="line">		 * (Annotation annotation : annotations) &#123; System.out.println(annotation); &#125;</span><br><span class="line">		 */</span><br><span class="line">		</span><br><span class="line">		Field[] fields = forname.getDeclaredFields();</span><br><span class="line">		StringBuffer sf = new StringBuffer();</span><br><span class="line">		sf.append(&quot;select  &quot;);</span><br><span class="line">		for(int i = 0;i&lt;fields.length;i++ ) &#123;</span><br><span class="line">			SetProperty setProperty = fields[i].getAnnotation(SetProperty.class);</span><br><span class="line">			String property = setProperty.name();</span><br><span class="line">			sf.append(property);</span><br><span class="line">			if (i==fields.length-1) &#123;</span><br><span class="line">				sf.append(&quot; from &quot;);</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				sf.append(&quot;,&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">		&#125;</span><br><span class="line">		//获取注解对象</span><br><span class="line">		SetTable setTable = forname.getAnnotation(SetTable.class);</span><br><span class="line">		String tablename = setTable.value();</span><br><span class="line">		sf.append(tablename);</span><br><span class="line">		System.out.println(sf);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行结果成功</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select  user_name,user_age from user_table</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/11/java注解/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/10/java反射机制/" class="archive-article-date">
-  	<time datetime="2019-07-10T03:05:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-10</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/10/java反射机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java反射机制</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/10/java反射机制/">java反射机制</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java注解"><span class="toc-number">1.</span> <span class="toc-text">Java注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用注解实现ORM框架映射"><span class="toc-number">2.</span> <span class="toc-text">使用注解实现ORM框架映射</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#orm对象关系映射实现select-user-name，user-age-from-user-table。"><span class="toc-number">2.0.1.</span> <span class="toc-text">orm对象关系映射实现select  user_name，user_age from user_table。</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/04/springboot笔记初级/" class="archive-article-date">
-  	<time datetime="2019-07-04T07:57:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-04</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/04/springboot笔记初级/">springboot笔记初级</a>
-    </h1>
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2019/07/11/java注解/", 
+    sourceId: "java注解",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/04/ThreadLocal的作用原理以及实现/" class="archive-article-date">
-  	<time datetime="2019-07-04T01:53:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/04/ThreadLocal的作用原理以及实现/">ThreadLocal的作用原理以及实现</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/02/我的第一篇/" class="archive-article-date">
-  	<time datetime="2019-07-02T06:14:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/02/我的第一篇/">基于hexo框架搭建我的博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/02/hello-world/" class="archive-article-date">
-  	<time datetime="2019-07-02T06:05:16.672Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/02/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -356,8 +405,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
